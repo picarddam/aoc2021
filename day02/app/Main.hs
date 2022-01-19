@@ -43,11 +43,11 @@ applyMoves moves = do
   mapM_ applyMove moves
 
 applyMove :: Move -> State Submarine ()
-applyMove (op, n) =
+applyMove (op, n) = modify $
   case op of
-    Down -> modify (depth +~ n)
-    Up -> modify (depth -~ n)
-    Forward -> modify (position +~ n)
+    Down -> depth +~ n
+    Up -> depth -~ n
+    Forward -> position +~ n
 
 solution :: [Move] -> Submarine
 solution moves = execState (applyMoves moves) defaultSubmarine
